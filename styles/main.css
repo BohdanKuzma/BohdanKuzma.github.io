@@ -648,7 +648,6 @@ footer .footer__text__third .footer__text__third-item {
 }
 @media screen and (max-width: 972px) {
   .container {
-    width: 768px;
     margin: 0 auto;
   }
   .main_container {
@@ -720,7 +719,7 @@ footer .footer__text__third .footer__text__third-item {
 }
 @media screen and (max-width: 785px) {
   .container {
-    width: 320px;
+    width: 100%;
     margin: 0 auto;
   }
   header {
