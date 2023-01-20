@@ -8,14 +8,14 @@ let delete_movie = document.querySelector('.icon');
 let btn_more_details = document.querySelector('.btn_more_details')
 let modal_more_info = document.querySelector('.modal_more_info')
 
-
+// Кнопка зачистки поля
 delete_movie.addEventListener('click', () => {
     input_movie.value = '';
     if (input_movie.value == '') {
         delete_movie.style.display = 'none'
     }
 })
-
+// Функція стягування даних omdb
 async function loadMovies() {
     const URL = `https://omdbapi.com/?s=${input_movie.value}&page=1&apikey=15498ea8`;
     const response = await fetch(`${URL}`);
@@ -31,17 +31,15 @@ async function loadMovies() {
             const dataDetails = await responseDetails.json();
             document.querySelectorAll('.btn_more_details')[i].addEventListener('click', function () {
                 detailsMovie(dataDetails)
-                console.log('click work');
                 modal_more_info.classList.add('active');
                 document.querySelector('.modal_body').style.display = 'block'
-
             })
         }
     } catch (e) {
-        return console.log(e);
+        console.log(e);
     }
 }
-
+// Функція створення фільмів
 function CreateMovies(movies) {
     if (input_movie.value <= 0) {
         alert('Введіть назву!')
@@ -66,30 +64,25 @@ function CreateMovies(movies) {
         }
     }
 }
-
+// Функіця створення "more details"
 function detailsMovie(movies) {
-    console.log(movies);
-    document.querySelector('.name_movie').innerHTML = movies.Title
-    document.querySelector('.rating_genre_year').innerHTML = movies.Rated
-    document.querySelector('.description').innerHTML = movies.Plot
-    document.querySelector('.written_by_cont').innerHTML = movies.Writer
-    document.querySelector('.directed_by_cont').innerHTML = movies.Director
-    document.querySelector('.starring_cont').innerHTML = movies.Director
-    document.querySelector('.box_office_cont').innerHTML = movies.BoxOffice
-    document.querySelector('.Awards_cont').innerHTML = movies.Awards
-    document.querySelector('.img_left').innerHTML = `<img src="${movies.Poster}">`
-    for (let j = 0; j < movies.Ratings.length; j++) {
-        let li = document.createElement("li");
-        li.textContent += movies.Ratings[j].Source + " " + movies.Ratings[j].Value;
-        document.querySelector('.ratings').append(li);
-    }
-
     try {
-
-
-        // console.log(movies.Title);
+        document.querySelector('.name_movie').innerHTML = movies.Title
+        document.querySelector('.rating_genre_year').innerHTML = movies.Rated
+        document.querySelector('.description').innerHTML = movies.Plot
+        document.querySelector('.written_by_cont').innerHTML = movies.Writer
+        document.querySelector('.directed_by_cont').innerHTML = movies.Director
+        document.querySelector('.starring_cont').innerHTML = movies.Director
+        document.querySelector('.box_office_cont').innerHTML = movies.BoxOffice
+        document.querySelector('.Awards_cont').innerHTML = movies.Awards
+        document.querySelector('.img_left').innerHTML = `<img src="${movies.Poster}">`
+        for (let j = 0; j < movies.Ratings.length; j++) {
+            let li = document.createElement("li");
+            li.textContent += movies.Ratings[j].Source + " " + movies.Ratings[j].Value;
+            document.querySelector('.ratings').append(li);
+        }
     } catch (e) {
-        return console.log(e)
+        console.log(e)
     }
 
 }
